@@ -1,7 +1,7 @@
 {
-    "name": "pam-engage-client",
+    "name": "rpamgoa",
     "version": "0.1.0",
-    "homepage": "https://devgit-dd.github.io/pam-engage-client/",
+    "homepage": "https://moyeen16.github.io/rpamgoa/",
     "dependencies": {
         "@ant-design/icons": "^5.3.0",
         "@reduxjs/toolkit": "^2.2.1",
