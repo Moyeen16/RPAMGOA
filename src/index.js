@@ -12,7 +12,7 @@ const root = createRoot(rootElement);
 
 root.render(
     <Provider store={store}>
-        <BrowserRouter basename={"pam-engage-client"}>
+        <BrowserRouter basename={"rpamgoa"}>
             <App />
         </BrowserRouter>
     </Provider>
