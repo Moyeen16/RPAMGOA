@@ -7,6 +7,8 @@ import third from "../../assets/Icons/third-rank.png";
 import fourth from "../../assets/Icons/fourth-rank.png";
 import fifth from "../../assets/Icons/fifth-rank.png";
 import axios from "axios";
+import { Delete } from "@styled-icons/fluentui-system-filled/Delete";
+import { Refresh } from "@styled-icons/boxicons-regular/Refresh";
 import { LineWave } from "react-loader-spinner";
 export default function Leaderboard() {
     const PASSCODE_TEXT = "abc123";
@@ -108,6 +110,21 @@ export default function Leaderboard() {
             customComponent: (data) => data + " s",
         },
     ];
+    const deleteData = async () => {
+        setLoading(true);
+        axios
+            .delete(
+                "https://pam-engagement-server-renderprod.onrender.com/deleteResponses"
+            )
+            .then((response) => {
+                if (response.status === 200) {
+                    setLoading(false);
+                    const temp = [];
+
+                    setTableData({ headers: headers, data: temp });
+                }
+            });
+    };
     const fetchData = async () => {
         setLoading(true);
         axios
@@ -172,8 +189,43 @@ export default function Leaderboard() {
                     </div>
                 ) : (
                     <>
-                        <div style={{ fontSize: "1.8rem", fontWeight: "500" }}>
-                            Leaderboard
+                        <div
+                            style={{
+                                fontSize: "1.8rem",
+                                fontWeight: "500",
+                                display: "flex",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <div
+                                style={{
+                                    fontSize: "1.8rem",
+                                    fontWeight: "500",
+                                }}
+                            >
+                                Leaderboard
+                            </div>
+                            <div>
+                                <span
+                                    title="Refresh Leaderboard"
+                                    style={{
+                                        color: "gray",
+                                        cursor: "pointer",
+                                        marginRight: "8px",
+                                    }}
+                                >
+                                    <Refresh size={26} onClick={fetchData} />
+                                </span>
+                                <span
+                                    title="Delete Responses"
+                                    style={{
+                                        color: "gray",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    <Delete size={24} onClick={deleteData} />
+                                </span>
+                            </div>
                         </div>
                         {tableData && <Table tableData={tableData} />}
                     </>
